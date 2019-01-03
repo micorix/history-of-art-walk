@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# History of Art Walk
+Presentation made with React and Spectacle. You can view it online [here](https://history-of-art-walk.projects.keenondev.com).
+
 
 ## Available Scripts
 
