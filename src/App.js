@@ -17,6 +17,7 @@ import {
   Quote,
   Slide,
   Text,
+  Notes,
   themes
 } from 'spectacle';
 import styled from '@emotion/styled'
@@ -85,60 +86,60 @@ export default class App extends Component {
     super(props)
     window.responsiveVoice.setDefaultVoice(defaultVoice);
   }
-  onSlideChange = (idx) => {
-    window.responsiveVoice.cancel()
-    const nextSlide = () => document.querySelector('.spectacle-deck div:first-child button:last-child').click()
-    const s = (msg, next=true) => {
-      window.responsiveVoice.speak(msg, defaultVoice)
-      if(next){
-        setTimeout(() => {
-          let interval = setInterval(() => {
-            if(!window.responsiveVoice.isPlaying()){
-              clearInterval(interval)
-              nextSlide()
-            }
-          }, 500)
-        }, 500)
-      }
-    }
-    switch (idx) {
-      case 1:
-        s(`
-          Jednym z najbardziej znanych barokowych zabytków Polski, jak i Warszawy, jest Kościół Wizytek.`)
-        break;
-      case 2.1:
-       s(`Tak wygląda on z zewnątrz. Barokowa fasada została wykonana według projektu Gaetano Chiaveriego`)
-       break;
-      case 5:
-          s(`Widzimy tutaj nawy główne kościoła wizytek oraz kościoła Matki Bożej Łaskawej.
-            Jak widać nawa Koscioła Wizytek, w szczególności ołtarz, jest bogato zdobiona elementami rzeźbionymi.
-            Widoczna jest również chrakterystyczna dla baroku polichromia.`, false);
-          break;
-      case 8:
-      s(`Szczególną uwagę należy zwrócić na ambonę w Kościele Wizytek.
-        Jest ona jedną z około sześćdziesięciu ambon łodziowych w Polsce.
-        Została ona wykonana w 1760 roku.
-        Na jej dziobie znajduje się srebrzysty orzeł rozpościerający skrzydła,
-         który XIX wieku przez wielu wiernych był uważany za symbol niepodległości.`);
-      break;
-      case 9:
-      s(`Będąc na placu Zamkowym nie można nie zauważyć Kościoła Świętej Anny.
-        Jeśli kiedykolwiek zaszliście do jego wnętrza mogliście zobaczyć piękny barokowy wystrój
-        Można tu dostrzec elementy chrakterystyczne dla baroku takie jak: malarstwo iluzjonistyczne, widoczne na pilastrach,
-        czy bogactwo złoceń
-
-
-        Sam kościół jednak nie jest kościołem barokowym, został zbudowany dużo przed barokiem i w późniejszym okresie przebudowywany.
-
-
-        Niezależnie, co powie Wojtek ja wolę barok.
-         `);
-         break;
-      case 10:
-        s('Dziękujemy za uwagę.', false)
-        break;
-    }
-  }
+  // onSlideChange = (idx) => {
+  //   window.responsiveVoice.cancel()
+  //   const nextSlide = () => document.querySelector('.spectacle-deck div:first-child button:last-child').click()
+  //   const s = (msg, next=true) => {
+  //     window.responsiveVoice.speak(msg, defaultVoice)
+  //     if(next){
+  //       setTimeout(() => {
+  //         let interval = setInterval(() => {
+  //           if(!window.responsiveVoice.isPlaying()){
+  //             clearInterval(interval)
+  //             nextSlide()
+  //           }
+  //         }, 500)
+  //       }, 500)
+  //     }
+  //   }
+  //   switch (idx) {
+  //     case 1:
+  //       s(`
+  //         Jednym z najbardziej znanych barokowych zabytków Polski, jak i Warszawy, jest Kościół Wizytek.`)
+  //       break;
+  //     case 2.1:
+  //      s(`Tak wygląda on z zewnątrz. Barokowa fasada została wykonana według projektu Gaetano Chiaveriego`)
+  //      break;
+  //     case 5:
+  //         s(`Widzimy tutaj nawy główne kościoła wizytek oraz kościoła Matki Bożej Łaskawej.
+  //           Jak widać nawa Koscioła Wizytek, w szczególności ołtarz, jest bogato zdobiona elementami rzeźbionymi.
+  //           Widoczna jest również chrakterystyczna dla baroku polichromia.`, false);
+  //         break;
+  //     case 8:
+  //     s(`Szczególną uwagę należy zwrócić na ambonę w Kościele Wizytek.
+  //       Jest ona jedną z około sześćdziesięciu ambon łodziowych w Polsce.
+  //       Została ona wykonana w 1760 roku.
+  //       Na jej dziobie znajduje się srebrzysty orzeł rozpościerający skrzydła,
+  //        który XIX wieku przez wielu wiernych był uważany za symbol niepodległości.`);
+  //     break;
+  //     case 9:
+  //     s(`Będąc na placu Zamkowym nie można nie zauważyć Kościoła Świętej Anny.
+  //       Jeśli kiedykolwiek zaszliście do jego wnętrza mogliście zobaczyć piękny barokowy wystrój
+  //       Można tu dostrzec elementy chrakterystyczne dla baroku takie jak: malarstwo iluzjonistyczne, widoczne na pilastrach,
+  //       czy bogactwo złoceń
+  //
+  //
+  //       Sam kościół jednak nie jest kościołem barokowym, został zbudowany dużo przed barokiem i w późniejszym okresie przebudowywany.
+  //
+  //
+  //       Niezależnie, co powie Wojtek ja wolę barok.
+  //        `);
+  //        break;
+  //     case 10:
+  //       s('Dziękujemy za uwagę.', false)
+  //       break;
+  //   }
+  // }
   render() {
     return (
       <>
@@ -151,37 +152,37 @@ export default class App extends Component {
 }
         `} />
       <Deck theme={theme} progress="bar" transition={["fade"]}>
-      <Slide>
-      <Heading>
-      Włącz głośniki!
-      </Heading>
-      <Heading size={3}>
-      I'm gonna talk!
-      </Heading>
-      </Slide>
-        <Slide onActive={() => this.onSlideChange(0)} bgImage="https://i.pinimg.com/originals/b7/18/f7/b718f7daf03d36fb4cecbc69e770ada5.jpg" bgDarken={0.8} transition={["zoom"]}>
+
+        <Slide  bgImage="https://i.pinimg.com/originals/b7/18/f7/b718f7daf03d36fb4cecbc69e770ada5.jpg" bgDarken={0.8} transition={["zoom"]}>
 
           <Heading size={1} textColor="tertiary"><BaroqueFont>Barokowo</BaroqueFont><br/><RenaissanceFont>renesansowy</RenaissanceFont></Heading>
           <Heading size={4} textColor="secondary">spacer po Starym Mieście i okolicach</Heading>
         </Slide>
 
-        <Slide onActive={() => this.onSlideChange(1)}  transition={["zoom"]}>
+        <Slide   transition={["zoom"]}>
         <Heading textColor="secondary"><BaroqueFont>Kościół Wizytek</BaroqueFont></Heading>
+        <Notes>
+        Jednym z najbardziej znanych barokowych zabytków Polski, jak i Warszawy, jest Kościół Wizytek.
+        </Notes>
         </Slide>
-        <FullSlide transition={["slide"]} onActive={() => this.onSlideChange(2.1)}>
+        <FullSlide transition={["slide"]}>
+        <Notes>
+        Tak wygląda on z zewnątrz. Barokowa fasada została wykonana według projektu Gaetano Chiaveriego
+        </Notes>
                 <Image src={images.wizytki.outside} />
+
         </FullSlide>
-        <Slide onActive={() => this.onSlideChange(2)}  transition={["fade"]}>
+        <Slide   transition={["fade"]}>
         <Heading>Kościół renesansowy?</Heading>
         </Slide>
-        <Slide onActive={() => this.onSlideChange(3)}  transition={["zoom"]}>
+        <Slide   transition={["zoom"]}>
         <Heading><RenaissanceFont>Kościół Matki Bożej Łaskawej</RenaissanceFont></Heading>
         </Slide>
-        <FullSlide onActive={() => this.onSlideChange(4)} transition={["slide"]}>
+        <FullSlide  transition={["slide"]}>
                 <Image src={images.laskawa.outside} />
         </FullSlide>
 
-        <ComparsionSlide  onActive={() => this.onSlideChange(5)}>
+        <ComparsionSlide  >
         <div className="in-row">
         <Image src={images.laskawa.inside} />
         </div>
@@ -190,28 +191,47 @@ export default class App extends Component {
                   <Text margin={40}  textAlign="left" textColor="secondary">{'\u2191'} <BaroqueFont>Kościół Wizytek</BaroqueFont></Text>
                   <Text margin={40} textAlign="left" textColor="tertiary">{'\u2190'} <RenaissanceFont>Kościół Matki Bożej Łaskawej</RenaissanceFont></Text>
                 </div>
+                <Notes>
+                Widzimy tutaj nawy główne kościoła wizytek oraz kościoła Matki Bożej Łaskawej.
+                  Jak widać nawa Koscioła Wizytek, w szczególności ołtarz, jest bogato zdobiona elementami rzeźbionymi.
+                  Widoczna jest również chrakterystyczna dla baroku polichromia.
+                </Notes>
         </ComparsionSlide>
-        <Slide onActive={() => this.onSlideChange(6)} transition={["slide"]}>
+        <Slide  transition={["slide"]}>
         <Image src={images.laskawa.sklepienie} />
 
         </Slide>
-        <FullSlide transition={["slide"]}  onActive={() => this.onSlideChange(7)}>
+        <FullSlide transition={["slide"]}  >
         <Image src={images.laskawa.kaplica} />
 
         </FullSlide>
-        <FullSlide  onActive={() => this.onSlideChange(8)}>
+        <FullSlide  >
         <Image src={images.wizytki.ambona} />
-
+        <Notes>
+        Szczególną uwagę należy zwrócić na ambonę w Kościele Wizytek.
+          Jest ona jedną z około sześćdziesięciu ambon łodziowych w Polsce.
+          Została ona wykonana w 1760 roku.
+          Na jej dziobie znajduje się srebrzysty orzeł rozpościerający skrzydła,
+           który XIX wieku przez wielu wiernych był uważany za symbol niepodległości.
+        </Notes>
         </FullSlide>
-        <FullSlide transition={["zoom"]}  onActive={() => this.onSlideChange(9)}>
+        <FullSlide transition={["zoom"]}  >
         <Image src={images.anna.inside} />
+        <Notes>
+        Będąc na placu Zamkowym nie można nie zauważyć Kościoła Świętej Anny.
+          Jeśli kiedykolwiek zaszliście do jego wnętrza mogliście zobaczyć piękny barokowy wystrój
+          Można tu dostrzec elementy chrakterystyczne dla baroku takie jak: malarstwo iluzjonistyczne, widoczne na pilastrach,
+          czy bogactwo złoceń
 
+
+          Sam kościół jednak nie jest kościołem barokowym, został zbudowany dużo przed barokiem i w późniejszym okresie przebudowywany.
+        </Notes>
         </FullSlide>
-        <Slide bgColor="secondary"  onActive={() => this.onSlideChange(10)}>
+        <Slide bgColor="secondary"  >
         <Heading size={2} textColor="tertiary">Dziękujemy za uwagę</Heading>
         <Heading size={4} textColor="primary">Wojciech Leśnik & Michał Oręziak</Heading>
         </Slide>
-          <Slide bgColor="secondary" transition={["slide"]}  onActive={() => this.onSlideChange(11)}>
+          <Slide bgColor="secondary" transition={["slide"]}  >
         <Heading size={4} textColor="tertiary">Zdjęcia</Heading>
         <Text textColor="primary">wikimedia.org, archwwa.net, nocookie.net</Text>
         <Heading size={4} textColor="tertiary">Bilbiografia</Heading>
